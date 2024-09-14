@@ -28,6 +28,7 @@ class Uploader:
 		self.github_username = os.environ.get('github_username')
 		self.github_repo = os.environ.get('github_repo')
 		self.project_path = os.environ.get('project_path')
+		self.github_dir = os.environ.get('github_dir')
 		# self.project_path ="/Users/wangjun/Code/GITHUB/pic" 
 		# self.github_username = "pekaboo"
 		# self.github_repo = "https://github.com/pekaboo/pic.git"
@@ -42,8 +43,6 @@ class Uploader:
 
 		# Get image
 		filename = str(hashlib.md5(self.__file.filename.encode('utf-8')).hexdigest())+str(int(time.time()))+'.'+suffix
-		if os.environ.get('github_dir'):
-			filename = os.environ.get('github_dir') +'/'+filename
 		if not os.path.exists(self.project_path):
 			os.makedirs(self.project_path)
 		self.__file.save(os.path.join(self.project_path, filename))
@@ -65,9 +64,7 @@ class Uploader:
 			sys.stderr.write(str(b))
 			notify('Error','Git error')
 
-	def __write_to_doc(self, filename):
-		if os.environ.get('github_dir'):
-			filename = os.environ.get('github_dir') +'/'+filename
+	def __write_to_doc(self, filename): 
 		remote_url = self.__MARKDOWN_IMG_URL.format(filename,self.github_username,self.github_repo,filename)
 		os.system('echo "{}"|pbcopy'.format(remote_url))
 		a,b = commands.getstatusoutput('pbpaste')
