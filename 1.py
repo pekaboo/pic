@@ -20,7 +20,7 @@ class Uploader:
 	# default master branch
 	# __MARKDOWN_IMG_URL = '![{}](https://github.com/{}/{}/raw/master/{})';
 	# __MARKDOWN_IMG_URL = '![{}](https://cdn.jsdelivr.net/gh/{}/{}/{})';
-	__MARKDOWN_IMG_URL = '![{}](https://raw.wangyitu.tech/{}/{}/main/{})';
+	__MARKDOWN_IMG_URL = '![{}](https://ghproxy.yitu.us.kg/https://raw.githubusercontent.com/{}/{}}/main/{})';
 
 
 	def __init__(self, file):
@@ -41,7 +41,8 @@ class Uploader:
 		# Image suffix
 		a,b,suffix = self.__file.filename.rpartition('.')
 
-		
+
+		print(a,b,suffix)
 		# Get image
 		filename = str(hashlib.md5(self.__file.filename.encode('utf-8')).hexdigest())+str(int(time.time()))+'.'+suffix
 		print(filename)
@@ -68,7 +69,9 @@ class Uploader:
 
 	def __write_to_doc(self, filename): 
 		print(filename,self.github_username,self.github_repo,filename)
-		remote_url = self.__MARKDOWN_IMG_URL.format(filename,self.github_username,self.github_repo,filename)
+		if(self.github_dir):
+			filename = self.github_dir+'/'+filename 
+		remote_url = self.__MARKDOWN_IMG_URL.format(filename,self.github_username,self.github_repo, filename)
 		os.system('echo "{}"|pbcopy'.format(remote_url))
 		a,b = commands.getstatusoutput('pbpaste')
 		self.print_pasteboard_content()
