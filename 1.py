@@ -28,6 +28,7 @@ class Uploader:
 		self.github_username = os.environ.get('github_username')
 		self.github_repo = os.environ.get('github_repo')
 		self.project_path = os.environ.get('project_path')
+  
 		self.github_dir = os.environ.get('github_dir')
 		# self.project_path ="/Users/wangjun/Code/GITHUB/pic" 
 		# self.github_username = "pekaboo"
