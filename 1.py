@@ -20,7 +20,7 @@ class Uploader:
 	# default master branch
 	# __MARKDOWN_IMG_URL = '![{}](https://github.com/{}/{}/raw/master/{})';
 	# __MARKDOWN_IMG_URL = '![{}](https://cdn.jsdelivr.net/gh/{}/{}/{})';
-	__MARKDOWN_IMG_URL = '![{}](https://ghproxy.yitu.us.kg/https://raw.githubusercontent.com/{}/{}}/main/{})';
+	__MARKDOWN_IMG_URL = '![{}](https://ghproxy.yitu.us.kg/https://raw.githubusercontent.com/{}/{}/main/{})';
 
 
 	def __init__(self, file):
