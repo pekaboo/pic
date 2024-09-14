@@ -41,7 +41,7 @@ class Uploader:
 		# Image suffix
 		a,b,suffix = self.__file.filename.rpartition('.')
 
-
+		
 		# Get image
 		filename = str(hashlib.md5(self.__file.filename.encode('utf-8')).hexdigest())+str(int(time.time()))+'.'+suffix
 		print(filename)
