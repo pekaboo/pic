@@ -45,7 +45,8 @@ class Uploader:
 		print(a,b,suffix)
 		# Get image
 		filename = str(hashlib.md5(self.__file.filename.encode('utf-8')).hexdigest())+str(int(time.time()))+'.'+suffix
-		print(filename)
+		if(self.github_dir):
+			filename = self.github_dir+'/'+filename 
 		if not os.path.exists(self.project_path):
 			os.makedirs(self.project_path)
 		self.__file.save(os.path.join(self.project_path, filename))
@@ -69,8 +70,6 @@ class Uploader:
 
 	def __write_to_doc(self, filename): 
 		print(filename,self.github_username,self.github_repo,filename)
-		if(self.github_dir):
-			filename = self.github_dir+'/'+filename 
 		remote_url = self.__MARKDOWN_IMG_URL.format(filename,self.github_username,self.github_repo, filename)
 		os.system('echo "{}"|pbcopy'.format(remote_url))
 		a,b = commands.getstatusoutput('pbpaste')
